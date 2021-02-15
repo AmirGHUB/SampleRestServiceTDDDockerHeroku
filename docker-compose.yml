@@ -1,0 +1,16 @@
+version: "3.9"
+services:
+  guestbook_db:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD : password
+  guestbook_service:
+    image: guestbook_service
+    ports:
+    - "8000:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: postgres
+    depends_on:
+      - guestbook_db
